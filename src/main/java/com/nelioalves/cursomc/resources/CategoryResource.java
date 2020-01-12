@@ -40,4 +40,7 @@ public class CategoryResource {
         Optional<Category> cat = categoryService.findOne(id);
         return ResponseEntity.status(HttpStatus.OK).body(cat.orElse(null));
     }
+
+System.out.println("banana azul");
 }
+
