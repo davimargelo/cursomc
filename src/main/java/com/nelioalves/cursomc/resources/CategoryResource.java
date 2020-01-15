@@ -37,8 +37,8 @@ public class CategoryResource {
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findOne(@PathVariable("id") Integer id) {
-        Optional<Category> cat = categoryService.findOne(id);
-        return ResponseEntity.status(HttpStatus.OK).body(cat.orElse(null));
+        Category cat = categoryService.findOne(id);
+        return ResponseEntity.status(HttpStatus.OK).body(cat);
     }
 }
 
