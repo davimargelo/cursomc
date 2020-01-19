@@ -1,9 +1,11 @@
 package com.nelioalves.cursomc.respositories;
 
-import com.nelioalves.cursomc.domain.Product;
+import com.nelioalves.cursomc.domain.Payment;
+import com.nelioalves.cursomc.domain.Pedido;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Integer> {
+public interface PaymentRepository extends JpaRepository<Payment, Integer> {
+
 }
