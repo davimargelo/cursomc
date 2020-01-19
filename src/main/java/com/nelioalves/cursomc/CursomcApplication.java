@@ -1,13 +1,8 @@
 package com.nelioalves.cursomc;
 
-import com.nelioalves.cursomc.domain.Category;
-import com.nelioalves.cursomc.domain.City;
-import com.nelioalves.cursomc.domain.Product;
-import com.nelioalves.cursomc.domain.State;
-import com.nelioalves.cursomc.respositories.CategoryRepository;
-import com.nelioalves.cursomc.respositories.CityRepository;
-import com.nelioalves.cursomc.respositories.ProductRepository;
-import com.nelioalves.cursomc.respositories.StateRepository;
+import com.nelioalves.cursomc.domain.*;
+import com.nelioalves.cursomc.domain.enums.ClientType;
+import com.nelioalves.cursomc.respositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +25,12 @@ public class CursomcApplication implements CommandLineRunner {
 	@Autowired
 	CityRepository cityRepository;
 
+	@Autowired
+	ClientRepository clientRepository;
+
+	@Autowired
+	AddressRepository addressRepository;
+
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
@@ -51,6 +52,9 @@ public class CursomcApplication implements CommandLineRunner {
 		p2.setCategories(Arrays.asList(cat1, cat2));
 		p3.setCategories(Arrays.asList(cat1));
 
+		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+		productRepository.saveAll(Arrays.asList(p1,p2,p3));
+
 		State st1 = new State(null, "Minas Gerais");
 		State st2 = new State(null, "São Paulo");
 
@@ -64,7 +68,16 @@ public class CursomcApplication implements CommandLineRunner {
 		stateRepository.saveAll(Arrays.asList(st1, st2));
 		cityRepository.saveAll(Arrays.asList(c1,c2,c3));
 
-		categoryRepository.saveAll(Arrays.asList(cat1, cat2));
-		productRepository.saveAll(Arrays.asList(p1,p2,p3));
+		Client cli1 = new Client("Maria Silva","maria@gmail.com", "3278482332", ClientType.PESSOAFISICA);
+
+		cli1.getTelephones().addAll(Arrays.asList("27894874", "98848373"));
+
+		Address ad1 = new Address("Rua Flores", "300", "Apto 303", "Jardim", "38893438", cli1, c1);
+		Address ad2 = new Address("Avenida Matos", "105", "Sala 800", "Centro", "12314534", cli1, c2);
+
+		cli1.getAddressList().addAll(Arrays.asList(ad1, ad2));
+
+		clientRepository.saveAll(Arrays.asList(cli1));
+		addressRepository.saveAll(Arrays.asList(ad1, ad2));
 	}
 }
