@@ -1,7 +1,7 @@
 package com.nelioalves.cursomc.resources;
 
-import com.nelioalves.cursomc.domain.Category;
-import com.nelioalves.cursomc.services.CategoryService;
+import com.nelioalves.cursomc.domain.Client;
+import com.nelioalves.cursomc.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,30 +14,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/categories")
-public class CategoryResource {
-
+@RequestMapping(value = "/clients")
+public class ClientResource {
     @Autowired
-    private CategoryService categoryService;
+    private ClientService clientService;
 
     @GetMapping
-    public List<Category> list() {
+    public List<Client> list() {
 
-        Category cat1 = new Category(1, "TI");
-        Category cat2 = new Category(2, "Office");
+        Client cli1 = new Client();
+        Client cli2 = new Client();
 
-        List<Category> list = new ArrayList<>();
+        List<Client> list = new ArrayList<>();
 
-        list.add(cat1);
-        list.add(cat2);
+        list.add(cli1);
+        list.add(cli2);
 
         return list;
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> findOne(@PathVariable("id") Integer id) {
-        Category cat = categoryService.findOne(id);
-        return ResponseEntity.status(HttpStatus.OK).body(cat);
+        Client cli = clientService.findOne(id);
+        return ResponseEntity.status(HttpStatus.OK).body(cli);
     }
 }
-
