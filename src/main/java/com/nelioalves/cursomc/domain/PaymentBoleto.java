@@ -1,5 +1,6 @@
 package com.nelioalves.cursomc.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.nelioalves.cursomc.domain.enums.PaymentState;
 
 import javax.persistence.Entity;
@@ -8,7 +9,9 @@ import java.util.Date;
 @Entity
 public class PaymentBoleto extends Payment {
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataVencimento;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date dataPagamento;
 
     public PaymentBoleto() {
